@@ -16,6 +16,7 @@ class MovieRecommender {
     this.quizContainerElement = document.getElementById("quiz-container");
     this.modalElement = document.getElementById("modal");
     this.modalButtonElement = document.getElementById("modal-button");
+    this.dotContainerElement = document.getElementById("dot-container");
   }
 
   start() {
@@ -25,6 +26,10 @@ class MovieRecommender {
 
     this.questionElement.innerText = questions[this.currentQuestion];
 
+    this.questions.forEach((_, index) => {
+      this.renderDot(index);
+    });
+
     this.moviesFirstQuestion.forEach((movie) => {
       const movieElement = document.createElement("div");
       movieElement.classList.add("movie");
@@ -32,15 +37,31 @@ class MovieRecommender {
         <img src="./assets/${movie.image}" alt="${movie.title}" />
       `;
       movieElement.addEventListener("click", () => {
+        this.selectDot(this.currentQuestion + 1);
         this.nextQuestion(movie.title);
       });
       this.quizContainerElement.appendChild(movieElement);
     });
+    document.getElementById("dot-0").classList.add("dot-selected");
+  }
+
+  renderDot(index) {
+    const dotElement = document.createElement("div");
+    dotElement.id = `dot-${index}`;
+    dotElement.classList.add("dot");
+    this.dotContainerElement.appendChild(dotElement);
+  }
+
+  selectDot(dotIndex) {
+    this.questions.forEach((_, index) => {
+      const dotElement = document.getElementById(`dot-${index}`);
+      dotElement.classList.remove("dot-selected");
+    });
+    document.getElementById(`dot-${dotIndex}`).classList.add("dot-selected");
   }
 
   nextQuestion(movieTitle) {
     if (this.currentQuestion + 1 === this.questions.length) {
-      console.log("You have reached the end of the quiz");
       return;
     }
 
@@ -56,17 +77,15 @@ class MovieRecommender {
 
     const recommendationsToPrint = this.findRecommendations(movieTitle);
 
-    recommendationsToPrint.movies.forEach(
-      (movie) => {
-        const movieElement = document.createElement("div");
-        movieElement.classList.add("movie");
-        movieElement.innerHTML = `
+    recommendationsToPrint.movies.forEach((movie) => {
+      const movieElement = document.createElement("div");
+      movieElement.classList.add("movie");
+      movieElement.innerHTML = `
             <img src="./assets/${movie.image}" alt="${movie.title}" />
         `;
-        this.createEventListeners(movieElement, movie.url, movie.title);
-        this.quizContainerElement.appendChild(movieElement);
-      }
-    );
+      this.createEventListeners(movieElement, movie.url, movie.title);
+      this.quizContainerElement.appendChild(movieElement);
+    });
   }
 
   findRecommendations(movieTitle) {
@@ -79,12 +98,14 @@ class MovieRecommender {
     if (this.currentQuestion + 1 === this.questions.length) {
       movieElement.addEventListener("click", () => {
         this.modalElement.classList.add("is-active");
+        this.quizContainerElement.classList.add("hidden");
         this.modalButtonElement.href = url;
       });
       return;
     }
 
     movieElement.addEventListener("click", () => {
+      this.selectDot(this.currentQuestion + 1);
       this.nextQuestion(movieTitle);
     });
   }
