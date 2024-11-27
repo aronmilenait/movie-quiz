@@ -25,6 +25,7 @@ body {
   align-items: center;
   min-height: 100vh;
   margin: 0;
+  text-align: center;
 }
 
 #quiz-container {
@@ -43,4 +44,10 @@ body {
 .movie img {
   width: 100%;
   height: auto;
+}
+
+#question {
+  font-weight: 600;
+  font-size: 34px;
+  color: #fff;
 }
