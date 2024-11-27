@@ -53,8 +53,10 @@ body {
 }
 
 .movie img {
-  width: 100%;
-  height: auto;
+  width: 200px;
+  height: 291px;
+  border-radius: 10px;
+  object-fit: cover;
 }
 
 #question {
