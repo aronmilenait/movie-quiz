@@ -135,6 +135,7 @@ body {
 }
 
 #modal-button button {
+  font-family: "Roboto", sans-serif; 
   background-color: #ec5632;
   color: #fff;
   width: 600px;
