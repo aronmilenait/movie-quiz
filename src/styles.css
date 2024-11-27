@@ -85,7 +85,7 @@ body {
 #modal-content {
   background-color: #fff;
   border-radius: 10px;
-  border: 8px solid #22daa8;
+  border: 10px solid #22daa8;
   padding: 20px;
   display: flex;
   flex-direction: column;
