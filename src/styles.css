@@ -3,6 +3,7 @@ html {
   font-family: "Roboto", sans-serif;
   position: relative;
   z-index: 1;
+  min-height: 100vh;
 }
 
 html::before {
@@ -23,7 +24,6 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
   margin: 0;
   text-align: center;
 }
@@ -203,4 +203,23 @@ body {
 
 .hidden {
   visibility: hidden;
+}
+
+footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+footer p {
+  font-size: 16px;
+  opacity: 0.5;
+  margin: 0 10px;
+  cursor: pointer;
 }

@@ -17,6 +17,7 @@ class MovieRecommender {
     this.modalElement = document.getElementById("modal");
     this.modalButtonElement = document.getElementById("modal-button");
     this.dotContainerElement = document.getElementById("dot-container");
+    this.questionStateContainerElement = document.getElementById("question-state-container");
   }
 
   start() {
@@ -99,6 +100,7 @@ class MovieRecommender {
       movieElement.addEventListener("click", () => {
         this.modalElement.classList.add("is-active");
         this.quizContainerElement.classList.add("hidden");
+        this.questionStateContainerElement.classList.add("hidden");
         this.modalButtonElement.href = url;
       });
       return;
